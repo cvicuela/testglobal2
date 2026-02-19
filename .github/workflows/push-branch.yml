@@ -16,3 +16,14 @@ jobs:
           cd /tmp/eo-temp
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/cvicuela/testglobal2.git
           git push -u origin claude/gender-selection-personalized-images-wt3kL
+
+      - name: Copy index.html to main branch
+        run: |
+          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/cvicuela/testglobal2.git /tmp/main-repo
+          cd /tmp/main-repo
+          git config user.email "github-actions@github.com"
+          git config user.name "GitHub Actions"
+          cp /tmp/eo-temp/index.html ./index.html
+          git add index.html
+          git diff --staged --quiet || git commit -m "Deploy index.html from feature branch to main"
+          git push origin main
