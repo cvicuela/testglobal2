@@ -1,0 +1,15 @@
+name: Push branch from EOtestGlobal
+
+on:
+  workflow_dispatch:
+
+  jobs:
+    push-branch:
+        runs-on: ubuntu-latest
+            steps:
+                  - name: Clone and push branch
+                          run: |
+                                    git clone https://github.com/cvicuela/EOtestGlobal.git -b claude/gender-selection-personalized-images-wt3kL /tmp/eo-temp
+                                              cd /tmp/eo-temp
+                                                        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/cvicuela/testglobal2.git
+                                                                  git push -u origin claude/gender-selection-personalized-images-wt3kL
